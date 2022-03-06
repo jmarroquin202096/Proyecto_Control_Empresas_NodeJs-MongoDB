@@ -150,14 +150,13 @@ function buscarEmpleadoporDepartamento(req, res) {
 }
 
 function buscarEmpleado(req, res) {
-    var idEmp = req.params.idEmpresa;
 
-    Empresas.findOne({ empleados: { $elemMatch: { "_id" : idEmp } } }, (err, empleadoEncontrado) => {
+    Empresas.findOne({ }, (err, empleadoEncontrado) => {
         if (err) return res.status(500).send({ mensaje: 'Error en la Petición' });
         if (!empleadoEncontrado) return res.status(500).send({ mensaje: 'Error al Encontrar Empleado' });
 
         return res.status(200).send({ empresa: empleadoEncontrado });
-    });
+    }).populate('idEmpleado', 'nombre puesto departamento ');
 }
 
  module.exports = {
