@@ -17,5 +17,6 @@ api.get('/buscarEmpleadoporNombre/:idEmpresa', [md_autentificacion.Auth, md_role
 api.get('/buscarEmpleadoporPuesto/:idEmpresa', [md_autentificacion.Auth, md_roles.verEmpresa], empresasController.buscarEmpleadoporPuesto);
 api.get('/buscarEmpleadoporDepartamento/:idEmpresa', [md_autentificacion.Auth, md_roles.verEmpresa], empresasController.buscarEmpleadoporDepartamento);
 api.get('/buscarEmpleado/:idEmpresa', [md_autentificacion.Auth, md_roles.verEmpresa], empresasController.buscarEmpleado);
+api.get('/pdfEmpresa/:idEmpresa', [md_autentificacion.Auth, md_roles.verEmpresa], empresasController.pdfs);
 
 module.exports =  api;

@@ -1,5 +1,9 @@
 const Empresas = require('../Models/empresas.model');
 const mongoose = require('mongoose');
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
+
+
 
 function agregarEmpresas(req, res) {
     var parametros = req.body;
@@ -159,6 +163,26 @@ function buscarEmpleado(req, res) {
     }).populate('idEmpleado', 'nombre puesto departamento ');
 }
 
+
+
+function pdfs(req, res){
+    var idEmp = req.params.idEmpresa;
+    var  doc = new PDFDocument();
+ 
+    Empresas.findOne({_id: idEmp}, (err, empresaEncontrada)=>{
+            doc.pipe(fs.createWriteStream(__dirname  + '/empresa.pdf'));
+            doc.text("Control Empresa");
+            doc.text("Empresa: " + empresaEncontrada.nombre);
+            doc.text("Email:" + empresaEncontrada.email);
+            doc.text("Empleados:" + empresaEncontrada.empleados);
+            doc
+            .font('Times-Roman')
+            .fillColor('black')
+            .fontSize(20)
+        });
+        doc.end();
+}
+
  module.exports = {
      agregarEmpresas,
      editarEmpresas,
@@ -170,5 +194,6 @@ function buscarEmpleado(req, res) {
      buscarEmpleadoporNombre,
      buscarEmpleadoporPuesto,
      buscarEmpleadoporDepartamento,
-     buscarEmpleado
+     buscarEmpleado,
+    pdfs,
  }

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const app = require('./app');
-const Usuarios = require('./src/Controller/usuario.controller');
 const { admin } = require('./src/Controller/usuario.controller');
 
 mongoose.Promise = global.Promise;

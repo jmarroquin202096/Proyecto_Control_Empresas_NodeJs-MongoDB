@@ -6,7 +6,7 @@ function admin() {
     var modeloUsuario = new Usuarios();
 
     Usuarios.find({ email: "Admin" }, (err, usuarioEnocntrado) => {
-        if (usuarioEnocntrado.length == 0) {
+        if (usuarioEnocntrado.length > 0) {
             return console.log("El Usuario Admin ya existe");
         } else {
             modeloUsuario.nombre = "Admin";
